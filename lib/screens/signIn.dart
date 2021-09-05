@@ -1,7 +1,6 @@
 import '/layout/background.dart';
 import '/layout/inputFiealdAuth.dart';
 import 'package:flutter/material.dart';
-import 'package:provider/provider.dart';
 
 class SignIn extends StatefulWidget {
   SignIn({Key? key}) : super(key: key);

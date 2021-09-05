@@ -1,4 +1,4 @@
-# wefix
+# wefix_app
 
 A new Flutter project.
 

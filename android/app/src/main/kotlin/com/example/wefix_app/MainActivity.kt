@@ -1,4 +1,4 @@
-package com.example.wefix
+package com.example.wefix_app
 
 import io.flutter.embedding.android.FlutterActivity
 
