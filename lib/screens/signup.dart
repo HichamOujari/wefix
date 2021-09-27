@@ -1,28 +1,26 @@
 import 'package:provider/provider.dart';
 import 'package:wefix_app/services/auth/authEmail.dart';
-import 'package:wefix_app/services/auth/facebook_sign_in.dart';
 import 'package:wefix_app/services/auth/google_sign_in.dart';
 
 import '/layout/background.dart';
 import '/layout/inputFiealdAuth.dart';
 import 'package:flutter/material.dart';
 
-import 'signup.dart';
-
-class SignIn extends StatefulWidget {
-  SignIn({Key? key}) : super(key: key);
+class SignUp extends StatefulWidget {
+  SignUp({Key? key}) : super(key: key);
 
   @override
-  _SignInState createState() => _SignInState();
+  _SignUpState createState() => _SignUpState();
 }
 
-class _SignInState extends State<SignIn> {
+class _SignUpState extends State<SignUp> {
   String email = "Email";
   String password = "Password";
+  Icon iconPass = Icon(Icons.visibility, color: Colors.black);
   TextEditingController emailInput = new TextEditingController();
   TextEditingController passInput = new TextEditingController();
+  TextEditingController confirmPassInput = new TextEditingController();
 
-  Icon iconPass = Icon(Icons.visibility, color: Colors.black);
   @override
   Widget build(BuildContext context) {
     Size size = MediaQuery.of(context).size;
@@ -42,7 +40,7 @@ class _SignInState extends State<SignIn> {
                   children: [
                     SizedBox(height: 50),
                     Text(
-                      "Sign in",
+                      "Sign Up",
                       style: TextStyle(
                         fontSize: 35,
                         fontWeight: FontWeight.w900,
@@ -62,26 +60,47 @@ class _SignInState extends State<SignIn> {
                       typeKey: TextInputType.text,
                       controller: passInput,
                     ),
+                    SizedBox(height: 20),
+                    InputFieldAuth(
+                      title: "Confirm " + password,
+                      icon: iconPass,
+                      typeKey: TextInputType.text,
+                      controller: confirmPassInput,
+                    ),
                     SizedBox(height: 40),
                     GestureDetector(
                       onTap: () async {
                         var emailValue = emailInput.text;
                         var passValue = passInput.text;
-                        final snackBar = SnackBar(
-                          content: Text("Check your information"),
-                          action: SnackBarAction(
-                            label: 'Ok!',
-                            onPressed: () {},
-                          ),
-                        );
-                        if (passValue.length < 8 || emailValue.length == 0) {
+                        var conPass = confirmPassInput.text;
+
+                        if (passValue != conPass ||
+                            passValue.length < 8 ||
+                            emailValue.length == 0) {
+                          final snackBar = SnackBar(
+                            content: Text(
+                                "The passwords must be identique & longer then 7 character"),
+                            action: SnackBarAction(
+                              label: 'Ok!',
+                              onPressed: () {},
+                            ),
+                          );
                           ScaffoldMessenger.of(context).showSnackBar(snackBar);
                         } else {
                           var rslt =
-                              await EmailAuth().signIn(emailValue, passValue);
+                              await EmailAuth().signUp(emailValue, passValue);
                           if (rslt == false) {
+                            final snackBar = SnackBar(
+                              content: Text("Email already exist"),
+                              action: SnackBarAction(
+                                label: 'Ok!',
+                                onPressed: () {},
+                              ),
+                            );
                             ScaffoldMessenger.of(context)
                                 .showSnackBar(snackBar);
+                          } else {
+                            Navigator.pop(context);
                           }
                         }
                       },
@@ -95,7 +114,7 @@ class _SignInState extends State<SignIn> {
                           borderRadius: BorderRadius.circular(20),
                         ),
                         child: Text(
-                          "Sign in",
+                          "Sign Up",
                           style: TextStyle(
                             fontSize: 25,
                             fontWeight: FontWeight.w900,
@@ -105,15 +124,7 @@ class _SignInState extends State<SignIn> {
                         alignment: Alignment.center,
                       ),
                     ),
-                    SizedBox(height: 50),
-                    Container(
-                      width: size.width * 0.8,
-                      child: Text(
-                        "Forget password",
-                        textAlign: TextAlign.center,
-                        style: TextStyle(color: Colors.blue, fontSize: 17),
-                      ),
-                    ),
+                    SizedBox(height: 30),
                     Container(
                       width: size.width * 0.3,
                       margin: EdgeInsets.only(top: 20),
@@ -152,17 +163,7 @@ class _SignInState extends State<SignIn> {
                           mainAxisAlignment: MainAxisAlignment.center,
                           children: [
                             GestureDetector(
-                              onTap: () {
-                                /*final snackBar = SnackBar(
-                                  content: Text("Check your information"),
-                                  action: SnackBarAction(
-                                    label: 'Ok!',
-                                    onPressed: () {},
-                                  ),
-                                );
-                                ScaffoldMessenger.of(context)
-                                    .showSnackBar(snackBar);*/
-                              },
+                              onTap: () {},
                               child: Icon(Icons.facebook,
                                   size: 50, color: Colors.blue.shade800),
                             ),
@@ -203,22 +204,15 @@ class _SignInState extends State<SignIn> {
                           mainAxisAlignment: MainAxisAlignment.center,
                           children: [
                             Text(
-                              " You havn’t  account ?  ",
+                              " You already have an account ?  ",
                               style: TextStyle(fontSize: 17),
                             ),
                             GestureDetector(
                               onTap: () {
-                                Navigator.push(
-                                  context,
-                                  MaterialPageRoute(
-                                    builder: (context) {
-                                      return SignUp();
-                                    },
-                                  ),
-                                );
+                                Navigator.pop(context);
                               },
                               child: Text(
-                                "Sign Up",
+                                "Sign In",
                                 style: TextStyle(
                                   fontSize: 17,
                                   color: Color(0XFFF59B794),

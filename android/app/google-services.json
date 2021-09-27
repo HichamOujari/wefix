@@ -1,0 +1,47 @@
+{
+  "project_info": {
+    "project_number": "949710371205",
+    "project_id": "wefix-a11b8",
+    "storage_bucket": "wefix-a11b8.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:949710371205:android:707cc8e0b656f504fd2cec",
+        "android_client_info": {
+          "package_name": "com.example.wefix_app"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "949710371205-q1d49tkoj571tahmv0cs3qhurjg27svg.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.wefix_app",
+            "certificate_hash": "8cd5627c82f68d427d67b9e4d444e2d37c079cd8"
+          }
+        },
+        {
+          "client_id": "949710371205-1gu9ok3st3damneom9jqjlgl19nola7u.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCc80KTwgLa3vy1fxw8k5KhcQ7JGEQKdQc"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "949710371205-1gu9ok3st3damneom9jqjlgl19nola7u.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

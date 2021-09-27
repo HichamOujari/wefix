@@ -1,6 +1,8 @@
 import 'dart:async';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 
+import 'home.dart';
 import 'signIn.dart';
 
 class SplashScreen extends StatefulWidget {
@@ -17,7 +19,20 @@ class _SplashScreenState extends State<SplashScreen> {
       Navigator.pushAndRemoveUntil(
         context,
         MaterialPageRoute(builder: (context) {
-          return SignIn();
+          return StreamBuilder(
+            stream: FirebaseAuth.instance.authStateChanges(),
+            builder: (context, snapshot) {
+              if (snapshot.connectionState == ConnectionState.waiting) {
+                return Center(child: CircularProgressIndicator());
+              } else if (snapshot.hasData) {
+                return Home();
+              } else if (snapshot.hasError) {
+                return Center(child: Text("Something Went Wrong"));
+              } else {
+                return SignIn();
+              }
+            },
+          );
         }),
         ModalRoute.withName("/SplashScreen"),
       );

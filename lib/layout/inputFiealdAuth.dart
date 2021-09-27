@@ -5,10 +5,14 @@ class InputFieldAuth extends StatelessWidget {
     Key? key,
     required this.title,
     required this.icon,
+    required this.typeKey,
+    required this.controller,
   }) : super(key: key);
 
   final String title;
   final Widget icon;
+  final TextInputType typeKey;
+  final TextEditingController controller;
 
   @override
   Widget build(BuildContext context) {
@@ -28,6 +32,8 @@ class InputFieldAuth extends StatelessWidget {
         ],
       ),
       child: TextField(
+        keyboardType: typeKey,
+        controller: controller,
         decoration: InputDecoration(
           enabledBorder: InputBorder.none,
           hintText: title,
